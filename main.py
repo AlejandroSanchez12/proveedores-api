@@ -18,7 +18,6 @@ app.add_middleware(
 # TODO: conectarse al cluster Admonsis  
 # client = MongoClient("mongodb://<usuario>:<contraseña>@157.253.236.88:8087")
 client= MongoClient(os.environ["MONGO_URI"])
-client = MongoClient("mongodb://ISIS2304D25202620:MojdEjNF0XLL@157.253.236.88:8087")
 # TODO: conectarse a la base de datos Admonsis  
 # db = client["ISIS*******"]
 db = client["ISIS2304D25202620"]
