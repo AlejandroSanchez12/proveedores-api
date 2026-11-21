@@ -30,16 +30,27 @@ def inicio():
 
 @app.get('/bares/{bar_id}/comentarios')
 def get_comentarios(bar_id: int):
-    comentarios = None  # TODO: completar
+    comentarios = list(db.comentarios_bares.find({"bar_id":bar_id},{"_id":0}))
     return comentarios
 
 @app.post('/bares/{bar_id}/comentarios')
 def post_comentario(bar_id: int, datos: dict):
     datos['bar_id'] = bar_id
     datos['fecha']  = datetime.now().isoformat()
-    # TODO: completar
+    db.comentarios_bares.insert_one(datos)
     return {'mensaje': 'Comentario guardado'}
 
+@app.get('/bares/{bar_id}/eventos')
+def get_eventos(bar_id: int):
+    eventos= list(db.eventos_bares.find({"bar_id":bar_id},{"_id":0}))
+    return eventos
+
+@app.post('/bares/{bar_id}/eventos')
+def post_eventos(bar_id:int, datos:dict):
+    datos['bar_id'] = bar_id
+    datos['fecha']  = datetime.now().isoformat()
+    db.eventos_bares.insert_one(datos)
+    return {'mensaje': 'evento guardado'}
 # TODO: implementar GET /bares/{bar_id}/eventos
 # Debe retornar todos los eventos del bar desde la colección 'eventos'
 
